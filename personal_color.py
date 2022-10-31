@@ -36,7 +36,7 @@ for k, d in enumerate(dets):
             # cv2.circle(img, (shape_point.x, shape_point.y), circle_r, color_l_out, line_width)
             mouth = np.append(mouth, np.array([[shape_point.x, shape_point.y]]), axis=0)
 
-    # 눈, 입 특징 좌표 출력 (디버그용)
+    # # 눈, 입 특징 좌표 출력 (디버그용)
     # print('Left eye : ', left_eye)
     # print('Right eye : ', right_eye)
     # print('Mouth : ', mouth)
@@ -67,11 +67,11 @@ S_th = ret_S
 V_th = ret_V
 S_max = V_max = 255
 
-# Otsu threshold value (디버그용)
-print('S thres value : ', ret_S)
-print('V thres value : ', ret_V)
+# # Otsu threshold value (디버그용)
+# print('S thres value : ', ret_S)
+# print('V thres value : ', ret_V)
 
-# 가중치
+# 가중치 : 변경하며 최적 값 찾기
 S_val = 0.4
 V_val = 1.3
 
@@ -110,10 +110,12 @@ for y in range(img_bottom-img_top-1):
             b_sum += b
             pixel_count += 1
 
-
 RGB_avg = (r_sum/pixel_count, g_sum/pixel_count, b_sum/pixel_count)
 print('Average RGB : ', RGB_avg)
+
 RGB_Mat = np.full((1,1,3), (r_sum/pixel_count/255, g_sum/pixel_count/255, b_sum/pixel_count/255), np.float32) 
+
+# RGB 색 평균을 LAB 색공간으로 변경 후 쿨톤 or 웜톤 판정
 LAB = cv2.cvtColor(RGB_Mat, cv2.COLOR_RGB2LAB)
 (l,a,b) = LAB[0][0]
 print('LAB : ({}, {}, {})'.format(l,a,b))
@@ -123,11 +125,11 @@ else :
     print('당신은 웜톤입니다.')
 
 
-# 원본 얼굴 이미지 출력
-cv2.imshow("Original", img_mask)
+# # 원본 얼굴 이미지 출력
+# cv2.imshow("Original", img_mask)
 
-# 피부 이미지 출력
-cv2.imshow("Skin", img_roi)
+# # 피부 이미지 출력
+# cv2.imshow("Skin", img_roi)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
