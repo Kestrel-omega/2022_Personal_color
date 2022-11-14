@@ -3,7 +3,7 @@ import numpy as np
 
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 detector = dlib.get_frontal_face_detector()
-img = cv2.imread('./image/6.jpg')
+img = cv2.imread('./image/5.jpg')
 dets = detector(img, 1)
 
 for k, d in enumerate(dets): 

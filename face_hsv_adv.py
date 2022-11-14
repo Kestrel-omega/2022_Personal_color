@@ -16,7 +16,7 @@ cv2.createTrackbar("V_th", "Slider Window", 0, 255, onChange)
 cv2.createTrackbar("V_max", "Slider Window", 0, 255, onChange)
 
 # 이미지 불러오기
-img = cv2.imread('./image/3.jpg')
+img = cv2.imread('./image/5.jpg')
 
 # Haar-Cascade classifier를 이용하여 얼굴 부분 감지
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
